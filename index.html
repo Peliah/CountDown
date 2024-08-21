@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <!-- Include the FlipClock CSS -->
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipclock@0.7.7/compiled/flipclock.css">
+</head>
+<body>
+    <div class="clock"></div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Include the FlipClock JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/flipclock@0.7.7/compiled/flipclock.min.js"></script>
+    <script type="text/javascript">
+        var clock;
+        $(document).ready(function() {
+            var currentDate = new Date();
+            var futureDate = new Date(2024, 7, 25, 0, 0, 0); // December 25, 2024
+            var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+            clock = $('.clock').FlipClock(diff, {
+                clockFace: 'DailyCounter',
+                countdown: true
+            });
+        });
+    </script>
+</body>
+</html>
