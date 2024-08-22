@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,28 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipclock@0.7.7/compiled/flipclock.css">
 </head>
+
 <body>
-    <div class="clock"></div>
+    <div class="container">
+        <div class="clock-container">
+            <div class="clock"></div>
+        </div>
+    </div>
+
+    <!-- Easter Egg Elements -->
+    <div id="easter-egg" class="easter-egg-hidden">
+        <img src="./assets/emote_marsupilami.gif" alt="Easter Egg" id="easter-egg-img">
+        <audio id="easter-egg-audio" src="./assets/Houba Houba Hop.mp3"></audio>
+    </div>
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Include the FlipClock JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/flipclock@0.7.7/compiled/flipclock.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/flipclock@0.7.7/compiled/flipclock.min.js"></script>
     <script type="text/javascript">
         var clock;
-        $(document).ready(function() {
+        $(document).ready(function () {
             var currentDate = new Date();
             var futureDate = new Date(2024, 7, 25, 0, 0, 0); // December 25, 2024
             var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
@@ -26,6 +39,29 @@
                 countdown: true
             });
         });
+
+        // Easter Egg Trigger
+        $(document).keydown(function (event) {
+            if (event.key === 'e') { // Press 'e' to trigger the Easter egg
+                showEasterEgg();
+            }
+        });
+
+        function showEasterEgg() {
+            var egg = $('#easter-egg');
+            var audio = $('#easter-egg-audio')[0];
+
+            egg.removeClass('easter-egg-hidden');
+            egg.addClass('easter-egg-visible');
+
+            audio.play();
+
+            setTimeout(function () {
+                egg.removeClass('easter-egg-visible');
+                egg.addClass('easter-egg-hidden');
+            }, 3000); // 3 seconds
+        }
     </script>
 </body>
+
 </html>
