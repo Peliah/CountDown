@@ -40,12 +40,30 @@
             });
         });
 
-        // Easter Egg Trigger
-        $(document).keydown(function (event) {
-            if (event.key === 'e') { // Press 'e' to trigger the Easter egg
-                showEasterEgg();
-            }
-        });
+        // // Easter Egg Trigger
+        // $(document).keydown(function (event) {
+        //     if (event.key === 'e') { // Press 'e' to trigger the Easter egg
+        //         showEasterEgg();
+        //     }
+        // });
+
+        // Easter Egg Trigger: Right-click, double left-click, or long press
+        $(document).on('contextmenu dblclick touchstart', function(event) {
+                if (event.type === 'touchstart') {
+                    // Detect long press
+                    var pressTimer;
+                    $(document).on('touchend', function() {
+                        clearTimeout(pressTimer);
+                    });
+                    pressTimer = setTimeout(function() {
+                        showEasterEgg();
+                    }, 800); // 800ms for long press
+                } else {
+                    showEasterEgg();
+                }
+                return false; // Prevent default right-click context menu
+            });
+            
 
         function showEasterEgg() {
             var egg = $('#easter-egg');
